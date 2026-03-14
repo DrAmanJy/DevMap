@@ -13,6 +13,9 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": ".",
+    "paths": {
+      "@DevMap/shared": ["packages/shared/src/index.ts"]
+    },
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
