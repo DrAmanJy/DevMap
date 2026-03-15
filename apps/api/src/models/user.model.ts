@@ -44,23 +44,28 @@ const userSchema = new Schema<User, UserModelType, UserMethods>(
       default: false,
     },
     otp: {
-      type: String,
-      default: null,
+      code: {
+        type: String, 
+        default: null,
+      },
+      otpExpiresAt: {
+        type: Date,
+        default: null,
+      },
+      sendOTPAt: {
+        type: Date,
+        default: null,
+       
+      },
     },
-    otpExpiresAt: {
-      type: Date,
-      default: null,
-    },
+
     otpAttempts: {
       type: Number,
       default: 0,
       min: 0,
       max: 5,
     },
-    resendOTPAt: {
-      type: Date,
-      default: null,
-    },
+
     refreshToken: {
       type: String,
       default: null,

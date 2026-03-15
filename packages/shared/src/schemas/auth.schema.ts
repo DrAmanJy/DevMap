@@ -9,7 +9,11 @@ const passwordValidation = z
   .string({ error: 'Password is required' })
   .min(8, 'Password must be at least 8 characters long')
   .max(32, 'Password cannot exceed 32 characters');
-
+const otpValidation = z.object({
+  code: z.string().nullable(),
+  otpExpiresAt: z.date().nullable(),
+  sendOTPAt: z.date().nullable(),
+});
 export const userSchema = z.object({
   _id: z.string(),
   name: z.string().min(3).max(16).trim(),
@@ -18,10 +22,8 @@ export const userSchema = z.object({
   role: z.enum(['owner', 'admin', 'user']).default('user'),
   avatar: z.string().url().nullable(),
   isVerified: z.boolean().default(false),
-  otp: z.string().nullable(),
-  otpExpiresAt: z.date().nullable(),
-  otpAttempts: z.number().int().min(0),
-  resendOTPAt: z.date().nullable(),
+  otp: otpValidation,
+  otpAttempts: z.number().int().min(0).max(5),
   refreshToken: z.string().nullable(),
   createdAt: z.date(),
   updatedAt: z.date(),
